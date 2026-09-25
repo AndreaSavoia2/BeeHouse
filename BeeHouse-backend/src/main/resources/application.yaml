@@ -1,0 +1,69 @@
+server:
+  port: 8080
+
+
+spring:
+
+  application:
+    name: BudgetHouse
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOSTNAME}:${MYSQL_PORT}/${MYSQL_DATABASE_NAME}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.MySQLDialect
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        highlight_sql: true
+    show-sql: true
+    open-in-view: false
+
+  main:
+    banner-mode: off
+
+  # MAIL
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    # username -> equivale alla email senza @gmail.com
+    username: ${MAIL_USERNAME}
+    # password -> passaword fornita da google per l'utilizzo di applicaizoni di terze parti
+    # ndbj tcnn ttxq ovwb
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            required: true
+
+spring-doc:
+  swagger-ui:
+    enabled: true
+    # localhost:8080/api/swagger-ui.html
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.project.budgethouse: info
+    org.hibernate.orm.jdbc.bind: trace
+    org.springframework: info
+
+# CUSTOM PROPERTIES
+
+application:
+  mail:
+    # EMAIL PER ESTESO
+    sender: ${MAIL}
+
+jwt:
+  secret: ${JWT_SECRET}                 # base64-encoded, min 256-bit — never commit
+  expiration: 3600000                   # 1 hour
